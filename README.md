@@ -1,6 +1,6 @@
-# iBubbendorf
+# iBubbendorff
 
-This **arduino app** allows you to transform a proprietary **Bubbendorf** remote control into a connected object that allows you to control your shutters remotely with your phone.
+This **arduino app** allows you to transform a proprietary **Bubbendorff** remote control into a connected object that allows you to control your shutters remotely with your phone.
 
 You can open and close your shutters using these requests  : 
 * GET http://ip-of-arduino/down
