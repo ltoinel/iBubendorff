@@ -13,18 +13,30 @@
 #include <SPI.h>
 #include <Ethernet.h>
 
-// UP and Down Button
+// UP and Down Button attached the the arduino inputs
+// You shloud adapt these values to your arduino setup.
 const int DOWN = 7;
 const int UP = 8;
 
 // Allowed commands 
 const String COMMAND_UP = "up";
 const String COMMAND_DOWN = "down";
+const String COMMAND_SWITCH = "switch";
+
+// Available status
+const String STATUS_OPEN = "open";
+const String STATUS_CLOSE = "close";
+const String STATUS_UNKNOWN = "unknown";
+
+// Press delay on the buttons
+const int PRESS_DELAY = 1000;
  
- 
+// Buffer
 char buffer[BUFSIZE];
 int index = 0;
-String status = "UNKNOWN";
+
+// Current shutters status
+String status = STATUS_UNKNOWN;
 
 // Enter a MAC address and IP address for your controller below.
 // The IP address will be dependent on your local network:
@@ -58,6 +70,23 @@ void setup() {
 
 }
 
+// Open the shutters
+void openShutters(){
+    digitalWrite(UP, HIGH); 
+    delay(PRESS_DELAY);   
+    digitalWrite(UP, LOW);
+    status = "OPEN";     
+}
+
+// Close the shutters
+void closeShutters(){             
+    digitalWrite(DOWN, HIGH); 
+    delay(PRESS_DELAY);   
+    digitalWrite(DOWN, LOW);     
+    status = "CLOSE";
+}
+
+// infitinite loop function
 void loop() {
   
   // listen for incoming clients
@@ -107,21 +136,23 @@ void loop() {
 #endif    
 
         // Up 
-        if(command == "up") {
-           
-          digitalWrite(UP, HIGH); 
-          delay(1000);   
-          digitalWrite(UP, LOW);
-          status = "OPEN";     
+        if(command == COMMAND_UP){ 
+          openShutters();
           
         // Down
-        } else if (command == "down") {
-                     
-          digitalWrite(DOWN, HIGH); 
-          delay(1000);   
-          digitalWrite(DOWN, LOW);     
-          status = "CLOSE";
-          
+        } else if (command == COMMAND_DOWN) {
+          closeShutters();
+        
+        // Switch
+        } else if (command == COMMAND_SWITCH) {
+
+          if(status == STATUS_OPEN){
+             closeShutters();
+            
+          } else {
+              openShutters();
+          }
+ 
         } else {
          
           // send a standard http 404 response header
