@@ -191,6 +191,7 @@ void loop() {
           
         // Half
         } else if (command == COMMAND_HALF) {
+          //Send response first because we will wait a lot during process
           sendResponse(client, STATUS_HALF);
           halfCloseShutters();
 
