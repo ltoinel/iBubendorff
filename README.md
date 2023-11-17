@@ -6,7 +6,7 @@ You can open and close your shutters using these requests  :
 * GET http://ip-of-arduino/down
 * GET http://ip-of-arduino/up
 
-My french post of this project : [Comment domotiser ses volets roulants radio pour moins de 50€ ?](http://www.geeek.org/comment-domotiser-ses-volets-radio-pour-moins-de-50-960/)
+My french post of this project : [Comment domotiser ses volets roulants radio pour moins de 50€ ?](https://www.geeek.org/comment-domotiser-ses-volets-radio-pour-moins-de-50-960/)
 
 Electronic schema : 2 relay are connected to the Bubbendorf remote control.
 
